@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia - Galerias por Seções - Chalé Toca do Esquilo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .section-card {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .section-title {
+            color: #FFE135;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title::before {
+            content: "📁";
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        code {
+            background: rgba(0,0,0,0.4);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        .highlight {
+            background: rgba(255, 193, 7, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #FFC107;
+        }
+        .step {
+            background: rgba(76, 175, 80, 0.2);
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #4CAF50;
+            border-radius: 8px;
+        }
+        .warning {
+            background: rgba(255, 87, 34, 0.2);
+            padding: 15px;
+            border-left: 4px solid #FF5722;
+            border-radius: 8px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .gallery-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .emoji-large {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 Guia Completo - Galerias Organizadas por Seções</h1>
+
+    <div class="section-card">
+        <h2 class="section-title">🏗️ Estrutura Implementada</h2>
+        <p>O site agora possui <strong>4 seções temáticas organizadas</strong> de galerias de imagens, cada uma com seu próprio conjunto de fotos e navegação independente.</p>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <div class="emoji-large">🏘️</div>
+                <h3>Chalés</h3>
+                <p>Fotos dos chalés e acomodações</p>
+                <small>2 imagens</small>
+            </div>
+            <div class="gallery-item">
+                <div class="emoji-large">🎮</div>
+                <h3>Salão de Jogos</h3>
+                <p>Espaço kids e entretenimento</p>
+                <small>2 imagens</small>
+            </div>
+            <div class="gallery-item">
+                <div class="emoji-large">🏞️</div>
+                <h3>Área Externa</h3>
+                <p>Jardins e espaços ao ar livre</p>
+                <small>2 imagens</small>
+            </div>
+            <div class="gallery-item">
+                <div class="emoji-large">🌲</div>
+                <h3>Natureza</h3>
+                <p>Paisagens e entorno natural</p>
+                <small>2 imagens</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h2 class="section-title">📁 Como Adicionar Novas Imagens</h2>
+
+        <div class="step">
+            <h3>Passo 1: Escolha a Seção</h3>
+            <p>Decida em qual seção temática sua imagem se encaixa melhor:
+            <code>chales</code>, <code>jogos</code>, <code>externa</code> ou <code>natureza</code></p>
+        </div>
+
+        <div class="step">
+            <h3>Passo 2: Adicione ao HTML</h3>
+            <p>Adicione um novo card na seção apropriada (encontre as seções no arquivo index.html):</p>
+            <code>
+&lt;div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('SECAO', INDICE)"&gt;<br>
+    &lt;img src="images/nova-imagem.jpg" alt="Descrição"&gt;<br>
+&lt;/div&gt;
+            </code>
+        </div>
+
+        <div class="step">
+            <h3>Passo 3: Adicione ao JavaScript</h3>
+            <p>Adicione uma entrada no array da seção correspondente:</p>
+            <code>
+const galeriaChales = [<br>
+    // ... imagens existentes<br>
+    {<br>
+        title: "Nome da Nova Imagem",<br>
+        content: `&lt;img src="images/nova-imagem.jpg"`<br>
+    }<br>
+];
+            </code>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h2 class="section-title">🎯 Recursos Implementados</h2>
+
+        <div class="highlight">
+            <h3>✅ Funcionalidades Ativas:</h3>
+            <ul>
+                <li><strong>Navegação independente:</strong> Cada seção tem sua própria navegação</li>
+                <li><strong>Modal temático:</strong> Mostra imagens em tela cheia</li>
+                <li><strong>Setas do teclado:</strong> ← → para navegar, ESC para fechar</li>
+                <li><strong>Sistema de fallback:</strong> Mostra placeholder se imagem falhar</li>
+                <li><strong>Design responsivo:</strong> Adapta-se a diferentes telas</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>📱 Como Usar:</h3>
+            <ol>
+                <li>Clique em qualquer imagem da galeria</li>
+                <li>Use as setas ← → para navegar dentro da seção</li>
+                <li>Use ESC ou clique fora para fechar</li>
+                <li>Cada seção mantém sua própria posição</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h2 class="section-title">🔧 Personalização Avançada</h2>
+
+        <div class="step">
+            <h3>Adicionar Nova Seção:</h3>
+            <p>Para criar uma nova seção temática, você precisaria:</p>
+            <ol>
+                <li>Adicionar nova div com gradient no HTML</li>
+                <li>Criar novo array JavaScript (galeriaNovaSecao)</li>
+                <li>Atualizar função getGalleryBySection()</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h3>Modificar Estilos:</h3>
+            <p>Para alterar cores/temas das seções, edite os estilos <code>background: linear-gradient(...)</code> no HTML</p>
+        </div>
+    </div>
+
+    <div class="warning">
+        <h3>⚠️ Observações Importantes:</h3>
+        <ul>
+            <li><strong>Não é possível</strong> carregar automaticamente todas as imagens da pasta</li>
+            <li>Cada imagem precisa ser adicionada manualmente ao código</li>
+            <li>Mantenha os nomes das seções em inglês para compatibilidade</li>
+            <li>Teste sempre no navegador após alterações</li>
+        </ul>
+    </div>
+
+    <div class="section-card">
+        <h2 class="section-title">🚀 Resumo Final</h2>
+
+        <div class="highlight">
+            <h3>✅ Sistema Implementado:</h3>
+            <p>🎨 <strong>4 seções temáticas organizadas</strong></p>
+            <p>📱 <strong>Navegação independente por seção</strong></p>
+            <p>🖼️ <strong>8 imagens distribuídas tematicamente</strong></p>
+            <p>⚡ <strong>Modal com navegação fluida</strong></p>
+            <p>🎯 <strong>Sistema de fallback ativo</strong></p>
+        </div>
+
+        <p><strong>A galeria interativa está totalmente funcional e organizada por temas!</strong> 🎉</p>
+    </div>
+</body>
+</html>

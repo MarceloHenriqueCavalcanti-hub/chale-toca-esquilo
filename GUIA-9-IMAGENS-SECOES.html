@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Atualizado - 9 Imagens por Seção</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .section-card {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .section-title {
+            color: #FFE135;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title::before {
+            content: "📁";
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        code {
+            background: rgba(0,0,0,0.4);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        .highlight {
+            background: rgba(255, 193, 7, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #FFC107;
+        }
+        .step {
+            background: rgba(76, 175, 80, 0.2);
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #4CAF50;
+            border-radius: 8px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .gallery-item {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        .emoji-large {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+        .structure-tree {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9em;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 Guia Completo - 9 Imagens por Seção</h1>
+
+    <div class="section-card">
+        <h2 class="section-title">🏗️ Estrutura Implementada</h2>
+        <p>O site agora possui <strong>4 seções temáticas</strong> com <strong>9 imagens cada</strong>, totalizando <strong>36 imagens organizadas</strong>.</p>
+
+        <div class="structure-tree">
+images/<br>
+├── chales/     (9 imagens dos chalés)<br>
+├── jogos/      (9 imagens jogos/kids)<br>
+├── externa/    (9 imagens área externa)<br>
+└── natureza/   (9 imagens natureza)
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <div class="emoji-large">🏘️</div>
+                <h3>Chalés</h3>
+                <p>9 imagens</p>
+                <small>pedalinho.jpg, interiores, etc.</small>
+            </div>
+            <div class="gallery-item">
+                <div class="emoji-large">🎮</div>
+                <h3>Jogos/Kids</h3>
+                <p>9 imagens</p>
+                <small>Salão, brinquedos, etc.</small>
+            </div>
+            <div class="gallery-item">
+                <div class="emoji-large">🏞️</div>
+                <h3>Área Externa</h3>
+                <p>9 imagens</p>
+                <small>Jardim, piscina, etc.</small>
+            </div>
+            <div class="gallery-item">
+                <div class="emoji-large">🌲</div>
+                <h3>Natureza</h3>
+                <p>9 imagens</p>
+                <small>Represa, trilhas, etc.</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h2 class="section-title">📁 Organização por Pastas</h2>
+
+        <div class="step">
+            <h3>✅ Pastas Criadas:</h3>
+            <ul>
+                <li><code>images/chales/</code> - Todas as imagens dos chalés</li>
+                <li><code>images/jogos/</code> - Salão de jogos e espaço kids</li>
+                <li><code>images/externa/</code> - Área externa e lazer</li>
+                <li><code>images/natureza/</code> - Natureza e entorno</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>🔄 Para Adicionar Novas Imagens:</h3>
+            <ol>
+                <li>Escolha a seção temática apropriada</li>
+                <li>Coloque a imagem na pasta correspondente</li>
+                <li>Adicione ao HTML e JavaScript</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h2 class="section-title">🎯 Recursos Implementados</h2>
+
+        <div class="highlight">
+            <h3>✅ Funcionalidades Ativas:</h3>
+            <ul>
+                <li><strong>9 imagens por seção</strong> (total 36 imagens)</li>
+                <li><strong>Navegação independente</strong> por seção temática</li>
+                <li><strong>Modal interativo</strong> com navegação fluida</li>
+                <li><strong>Setas do teclado</strong> ← → ESC</li>
+                <li><strong>Sistema de fallback</strong> para imagens indisponíveis</li>
+                <li><strong>Design responsivo</strong> para todas as telas</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>📱 Como Usar:</h3>
+            <ol>
+                <li>Clique em qualquer imagem da galeria</li>
+                <li>Use ← → para navegar dentro da seção</li>
+                <li>Cada seção mantém sua própria posição</li>
+                <li>ESC ou clique fora para fechar</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h2 class="section-title">🔧 Personalização Avançada</h2>
+
+        <div class="step">
+            <h3>Adicionar Nova Seção:</h3>
+            <ol>
+                <li>Crie nova pasta em <code>images/</code></li>
+                <li>Adicione seção no HTML com gradiente único</li>
+                <li>Crie array JavaScript correspondente</li>
+                <li>Atualize função <code>getGalleryBySection()</code></li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h3>Modificar Número de Imagens:</h3>
+            <p>Para alterar de 9 para outro número, edite:</p>
+            <ul>
+                <li>HTML: número de <code>&lt;div class="gallery-image"&gt;</code></li>
+                <li>JavaScript: número de objetos no array</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h2 class="section-title">🚀 Resumo Final</h2>
+
+        <div class="highlight">
+            <h3>✅ Sistema Implementado:</h3>
+            <p>🎨 <strong>4 seções × 9 imagens = 36 imagens totais</strong></p>
+            <p>📁 <strong>Pastas organizadas por tema</strong></p>
+            <p>🖼️ <strong>Imagens locais + Unsplash</strong></p>
+            <p>⚡ <strong>Navegação fluida e independente</strong></p>
+            <p>🎯 <strong>Sistema profissional completo</strong></p>
+        </div>
+
+        <p><strong>A galeria interativa está totalmente funcional com organização temática avançada!</strong> 🎉</p>
+    </div>
+</body>
+</html>

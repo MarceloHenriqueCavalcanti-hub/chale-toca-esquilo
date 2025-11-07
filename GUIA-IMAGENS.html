@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Imagens - Chalé Toca do Esquilo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        code {
+            background: rgba(0,0,0,0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        .step {
+            background: rgba(76, 175, 80, 0.2);
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #4CAF50;
+            border-radius: 5px;
+        }
+        .warning {
+            background: rgba(255, 193, 7, 0.2);
+            padding: 15px;
+            border-left: 4px solid #FFC107;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>📸 Guia Completo - Gerenciar Imagens da Galeria</h1>
+
+    <div class="card">
+        <h2>🎯 Como Funciona Atualmente</h2>
+        <p>O código está configurado para carregar imagens da pasta <code>images/</code> localizada na raiz do projeto.</p>
+
+        <div class="step">
+            <h3>✅ Imagens Já Configuradas:</h3>
+            <ul>
+                <li><strong>Foto 1:</strong> <code>images/pedalinho.jpg</code></li>
+                <li><strong>Foto 2:</strong> <code>images/WhatsApp Image 2025-10-07 at 15.43.04.jpeg</code></li>
+                <li><strong>Foto 3:</strong> <code>images/WhatsApp_Image_2025-10-07_at_15.54.56-removebg-preview.png</code></li>
+                <li><strong>Foto 4:</strong> <code>images/logo.png.png</code></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📁 Como Adicionar Novas Imagens</h2>
+
+        <div class="step">
+            <h3>Passo 1: Coloque as imagens na pasta</h3>
+            <p>Certifique-se de que suas imagens estão na pasta <code>images/</code> no diretório raiz do projeto.</p>
+        </div>
+
+        <div class="step">
+            <h3>Passo 2: Adicione ao HTML</h3>
+            <p>Para cada nova imagem, adicione um novo card na galeria (após a linha 551 do index.html):</p>
+            <code>
+&lt;div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal(X)"&gt;<br>
+    &lt;img src="images/nova-imagem.jpg"<br>
+         alt="Descrição da imagem"<br>
+         class="w-full h-48 object-cover"&gt;<br>
+&lt;/div&gt;
+            </code>
+        </div>
+
+        <div class="step">
+            <h3>Passo 3: Adicione ao Array JavaScript</h3>
+            <p>Adicione uma nova entrada no array <code>images[]</code> (após a linha 765):</p>
+            <code>
+{<br>
+    title: "Nome da Imagem",<br>
+    content: `&lt;img src="images/nova-imagem.jpg"`<br>
+}<br>
+            </code>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🖼️ Dicas para Imagens</h2>
+
+        <div class="step">
+            <h3>Formatos Suportados:</h3>
+            <ul>
+                <li><strong>.jpg/.jpeg</strong> - Melhor para fotos</li>
+                <li><strong>.png</strong> - Melhor para imagens com transparência</li>
+                <li><strong>.gif</strong> - Para animações</li>
+                <li><strong>.webp</strong> - Melhor compressão (moderno)</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>Otimizações:</h3>
+            <ul>
+                <li>Redimensione para <strong>800x600px</strong> ou menor</li>
+                <li>Use ferramentas como <strong>TinyPNG</strong> para compressão</li>
+                <li>Nomeie arquivos sem espaços ou caracteres especiais</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="warning">
+        <h3>⚠️ Limitações</h3>
+        <p><strong>Não é possível</strong> carregar automaticamente todas as imagens da pasta via JavaScript puro por questões de segurança do navegador.</p>
+        <p>Cada imagem precisa ser adicionada manualmente ao código HTML e JavaScript.</p>
+    </div>
+
+    <div class="card">
+        <h2>🚀 Para Carregamento Automático (Avançado)</h2>
+        <p>Para carregar automaticamente todas as imagens da pasta, você precisaria:</p>
+        <ul>
+            <li>Backend em Node.js/Python/PHP</li>
+            <li>API para listar arquivos da pasta</li>
+            <li>JavaScript para consumir a API</li>
+        </ul>
+        <p>Isso foge do escopo de um arquivo HTML estático simples.</p>
+    </div>
+
+    <div class="card">
+        <h2>✅ Resumo</h2>
+        <div class="step">
+            <p>🔥 <strong>Solução Atual:</strong> Funciona perfeitamente com arquivos locais</p>
+            <p>📁 <strong>Localização:</strong> Pasta <code>images/</code> na raiz do projeto</p>
+            <p>🖱️ <strong>Como adicionar:</strong> Manualmente no HTML e JavaScript</p>
+            <p>⚡ <strong>Vantagem:</strong> Rápido, simples e confiável</p>
+        </div>
+    </div>
+</body>
+</html>

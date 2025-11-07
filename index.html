@@ -1,0 +1,2075 @@
+<!-- ================================================== -->
+<!-- CABEÇALHO DO DOCUMENTO HTML -->
+<!-- ================================================== -->
+
+<!-- Definição do tipo de documento como HTML5 -->
+<!DOCTYPE html>
+
+<!-- Abertura da tag HTML com definição do idioma como português brasileiro -->
+<html lang="pt-BR">
+
+<!-- ================================================== -->
+<!-- META TAGS E CONFIGURAÇÕES DO DOCUMENTO -->
+<!-- ================================================== -->
+<head>
+    <!-- Definição do charset UTF-8 para suportar caracteres especiais -->
+    <meta charset="UTF-8">
+    
+    <!-- Configuração da viewport para responsividade em dispositivos móveis -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Título da página que aparece na aba do navegador -->
+    <title>Chalé Toca do Esquilo</title>
+    
+    <!-- Importação do Tailwind CSS via CDN para estilos utilitários -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Importação do Font Awesome para ícones vetoriais -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- ================================================== -->
+    <!-- ESTILOS CSS INTERNOS -->
+    <!-- ================================================== -->
+    <style>
+        /* ================================================== */
+        /* ESTILOS GERAIS */
+        /* ================================================== */
+        
+        /* Configuração do box-sizing para incluir padding e border no cálculo da largura */
+        body {
+            box-sizing: border-box;
+        }
+        
+        /* ================================================== */
+        /* ANIMAÇÕES PARA O CARTÃO INTERATIVO */
+        /* ================================================== */
+        
+        /* Animação de entrada do cartão principal */
+        @keyframes cardFadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Animação de pulso para o logo */
+        @keyframes logoPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0);
+            }
+        }
+        
+        /* Animação de brilho */
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+        
+        /* Animação de gradiente animado */
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        /* Animação de bounce suave */
+        @keyframes softBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        /* Animação de rotação 3D */
+        @keyframes rotate3D {
+            from {
+                transform: perspective(1000px) rotateY(0deg);
+            }
+            to {
+                transform: perspective(1000px) rotateY(360deg);
+            }
+        }
+        
+        /* ================================================== */
+        /* ESTILOS DO CARTÃO INTERATIVO PRINCIPAL */
+        /* ================================================== */
+        
+        /* Gradiente verde animado para cards de informação */
+        .info-card {
+            background: linear-gradient(135deg, #008000 0%, #006400 50%, #000000 100%);
+            background-size: 200% 200%;
+            animation: cardFadeInUp 0.8s ease-out, gradientShift 15s ease infinite;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+        
+        /* Efeito de brilho no cartão */
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 70%
+            );
+            animation: shimmer 3s infinite;
+            pointer-events: none;
+        }
+        
+        /* Container do logo com animação */
+        .logo-container {
+            animation: logoPulse 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        /* Efeito hover no logo */
+        .logo-container:hover {
+            transform: rotate(360deg) scale(1.1);
+            animation: none;
+        }
+        
+        /* Imagem do logo com borda animada */
+        .logo-image {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .logo-image::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(45deg, #fff, #0f0, #fff);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .logo-container:hover .logo-image::after {
+            opacity: 1;
+            animation: rotate3D 2s linear infinite;
+        }
+        
+        /* Título com animação de entrada */
+        .main-title {
+            animation: cardFadeInUp 1s ease-out 0.2s both;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .main-title:hover {
+            transform: scale(1.05);
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Subtítulo com animação */
+        .subtitle {
+            animation: cardFadeInUp 1s ease-out 0.4s both;
+        }
+        
+        /* ================================================== */
+        /* CARDS INTERNOS COM EFEITO 3D */
+        /* ================================================== */
+        
+        .info-inner-card {
+            animation: cardFadeInUp 1s ease-out 0.6s both;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            position: relative;
+        }
+        
+        .info-inner-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .info-inner-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.25) !important;
+        }
+        
+        .info-inner-card:hover::before {
+            opacity: 1;
+        }
+        
+        /* Ícones dos cards com animação */
+        .card-icon {
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .info-inner-card:hover .card-icon {
+            transform: scale(1.2) rotate(10deg);
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        }
+        
+        /* ================================================== */
+        /* ÍCONES SOCIAIS APRIMORADOS */
+        /* ================================================== */
+        
+        .social-icons-container {
+            animation: cardFadeInUp 1s ease-out 0.8s both;
+        }
+        
+        .social-icon {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-8px) scale(1.15) rotate(5deg);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .social-icon:hover::before {
+            transform: scale(1);
+        }
+        
+        .social-icon:active {
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        /* Animação de pulso nos ícones sociais */
+        @keyframes socialPulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+            }
+        }
+        
+        .social-icon:nth-child(1) {
+            animation: socialPulse 2s infinite;
+            animation-delay: 0s;
+        }
+        
+        .social-icon:nth-child(2) {
+            animation: socialPulse 2s infinite;
+            animation-delay: 0.2s;
+        }
+        
+        .social-icon:nth-child(3) {
+            animation: socialPulse 2s infinite;
+            animation-delay: 0.4s;
+        }
+        
+        .social-icon:nth-child(4) {
+            animation: socialPulse 2s infinite;
+            animation-delay: 0.6s;
+        }
+        
+        /* ================================================== */
+        /* BADGE DE DESTAQUE */
+        /* ================================================== */
+        
+        .badge-destaque {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.875rem;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            animation: softBounce 2s ease-in-out infinite;
+            z-index: 10;
+        }
+        
+        /* ================================================== */
+        /* ESTILOS DA GALERIA DE IMAGENS */
+        /* ================================================== */
+        
+        /* Classe base para imagens da galeria com transições suaves */
+        .gallery-image {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        /* Efeito hover para imagens da galeria - escala e sombra */
+        .gallery-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        
+        /* ================================================== */
+        /* ESTILOS DO MODAL */
+        /* ================================================== */
+        
+        /* Estilo do modal com blur de fundo e animação de fade in */
+        .modal {
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        /* Definição da animação fadeIn para o modal */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Estilo do conteúdo do modal com animação de slide in */
+        .modal-content {
+            animation: slideIn 0.3s ease;
+        }
+        
+        /* Definição da animação slideIn para o conteúdo do modal */
+        @keyframes slideIn {
+            from { transform: scale(0.8) translateY(20px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        
+        /* ================================================== */
+        /* ESTILOS DOS ÍCONES DE COMODIDADES */
+        /* ================================================== */
+        
+        /* Transições suaves para ícones de comodidades */
+        .amenity-icon {
+            transition: transform 0.2s ease;
+        }
+        
+        /* Efeito hover para ícones de comodidades - escala */
+        .amenity-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        /* ================================================== */
+        /* RESPONSIVIDADE */
+        /* ================================================== */
+        
+        @media (max-width: 768px) {
+            .info-card {
+                animation: cardFadeInUp 0.6s ease-out;
+            }
+            
+            .badge-destaque {
+                top: 10px;
+                right: 10px;
+                font-size: 0.75rem;
+                padding: 6px 12px;
+            }
+            
+            .social-icon:hover {
+                transform: translateY(-5px) scale(1.1);
+            }
+        }
+        
+        /* ================================================== */
+        /* EFEITOS DE LOADING */
+        /* ================================================== */
+        
+        @keyframes shimmerLoading {
+            0% {
+                background-position: -468px 0;
+            }
+            100% {
+                background-position: 468px 0;
+            }
+        }
+        
+        .loading-shimmer {
+            animation: shimmerLoading 1.2s ease-in-out infinite;
+            background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+            background-size: 468px 100%;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 to-black min-h-screen p-4">
+    <!-- ================================================== -->
+    <!-- CONTEÚDO PRINCIPAL DA PÁGINA -->
+    <!-- ================================================== -->
+    <div class="max-w-4xl mx-auto">
+        <!-- ================================================== -->
+        <!-- CARD DO CABEÇALHO -->
+        <!-- ================================================== -->
+        <div class="info-card rounded-2xl shadow-2xl text-white p-8 mb-6">
+            <!-- Badge de Destaque -->
+            <div class="badge-destaque">
+                ⭐ Destaque
+            </div>
+            
+            <!-- ================================================== -->
+            <!-- SEÇÃO DO LOGO E TÍTULO -->
+            <!-- ================================================== -->
+            <div class="text-center mb-6">
+                <div class="logo-container mb-4">
+                    <!-- Logo do chalé com fallback emoji -->
+                    <img src="https://lh3.googleusercontent.com/d/1XHJM5g4wCejnxvWTp2k7lJmnmHG7UKxc" 
+                         alt="Logo Chalé Toca do Esquilo" 
+                         class="logo-image w-24 h-24 mx-auto rounded-full shadow-lg object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <!-- Emoji de esquilo como fallback quando a imagem não carrega -->
+                    <div class="text-6xl" style="display: none;">🐿️</div>
+                </div>
+                <!-- Título principal do chalé -->
+                <h1 class="main-title text-4xl font-bold mb-2">Chalé Toca do Esquilo</h1>
+                <!-- Subtítulo descritivo -->
+                <p class="subtitle text-xl opacity-90">Seu refúgio na natureza</p>
+            </div>
+            
+            <!-- ================================================== -->
+            <!-- INFORMAÇÕES DE CONTATO E DISPONIBILIDADE -->
+            <!-- ================================================== -->
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <!-- Card de informações de contato -->
+                <div class="info-inner-card bg-white/20 rounded-xl p-4">
+                    <h3 class="font-semibold mb-3 flex items-center">
+                        <i class="card-icon fas fa-info-circle mr-2"></i>
+                        Informações de Contato
+                    </h3>
+                    <div class="space-y-2 text-sm">
+                        <!-- Telefone para contato -->
+                        <p><i class="fas fa-phone mr-2"></i> (14) 99140-7288</p>
+                        <!-- Email para contato -->
+                        <p><i class="fas fa-envelope mr-2"></i> contato@chaletocadoesquilo.com.br</p>
+                        <!-- Localização do chalé -->
+                        <p><i class="fas fa-map-marker-alt mr-2"></i> Arandu-SP - Represa de Jurumirim</p>
+                    </div>
+                </div>
+                
+                <!-- Card de disponibilidade -->
+                <div class="info-inner-card bg-white/20 rounded-xl p-4">
+                    <h3 class="font-semibold mb-3 flex items-center">
+                        <i class="card-icon fas fa-clock mr-2"></i>
+                        Disponibilidade
+                    </h3>
+                    <div class="space-y-2 text-sm">
+                        <!-- Horário de check-in -->
+                        <p><i class="fas fa-calendar mr-2"></i> Check-in: 14h</p>
+                        <!-- Horário de check-out -->
+                        <p><i class="fas fa-calendar-check mr-2"></i> Check-out: 12h</p>
+                        <!-- Capacidade máxima -->
+                        <p><i class="fas fa-users mr-2"></i> Até 4 pessoas</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ================================================== -->
+            <!-- REDES SOCIAIS -->
+            <!-- ================================================== -->
+            <div class="social-icons-container text-center">
+                <h3 class="font-semibold mb-4">Siga-nos nas redes sociais</h3>
+                <div class="flex justify-center space-x-4">
+                    <!-- Link para Instagram -->
+                    <a href="https://www.instagram.com/chale_tocadoesquilo?igsh=eTV6MGMwYTB1Yjkz" target="_blank" rel="noopener noreferrer" 
+                       class="social-icon bg-pink-500 hover:bg-pink-600 p-3 rounded-full">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <!-- Link para Facebook -->
+                    <a href="https://www.facebook.com/share/17GU9M7yXk/" target="_blank" rel="noopener noreferrer" 
+                       class="social-icon bg-blue-600 hover:bg-blue-700 p-3 rounded-full">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <!-- Link para WhatsApp -->
+                    <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" 
+                       class="social-icon bg-green-500 hover:bg-green-600 p-3 rounded-full">
+                        <i class="fab fa-whatsapp text-xl"></i>
+                    </a>
+                    <!-- Link para Airbnb -->
+                    <a href="https://airbnb.com/h/tocadoesquilo" target="_blank" rel="noopener noreferrer" 
+                       class="social-icon bg-red-500 hover:bg-red-600 p-3 rounded-full">
+                        <i class="fab fa-airbnb text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ================================================== -->
+        <!-- SEÇÃO DE COMODIDADES -->
+        <!-- ================================================== -->
+        <div class="rounded-2xl shadow-xl p-6 mb-6" style="background: linear-gradient(135deg, #008000 0%, #000000 100%);">
+            <h2 class="text-2xl font-bold text-white mb-6 text-center">Chalé Estilo Rústico</h2>
+            <div class="mb-6 text-white">
+                <p class="text-lg font-semibold mb-4">Equipados com:</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Cozinha -->
+                <div class="bg-white/20 rounded-xl p-4 text-white">
+                    <div class="text-3xl mb-3">🍳</div>
+                    <h3 class="font-bold text-lg mb-2">Cozinha</h3>
+                    <ul class="text-sm space-y-1">
+                        <li>• Microondas</li>
+                        <li>• Forno elétrico</li>
+                        <li>• Frigobar</li>
+                        <li>• Pia</li>
+                        <li>• Sanduicheira</li>
+                        <li>• Cafeteira</li>
+                        <li>• Utensílios básicos</li>
+                        <li>• Churrasqueira à carvão</li>
+                    </ul>
+                </div>
+
+                <!-- Sala -->
+                <div class="bg-white/20 rounded-xl p-4 text-white">
+                    <div class="text-3xl mb-3">🛋️</div>
+                    <h3 class="font-bold text-lg mb-2">Sala</h3>
+                    <ul class="text-sm space-y-1">
+                        <li>• Sofá cama</li>
+                        <li>• TV LCD</li>
+                        <li>• Wi-fi</li>
+                    </ul>
+                </div>
+
+                <!-- Quarto -->
+                <div class="bg-white/20 rounded-xl p-4 text-white">
+                    <div class="text-3xl mb-3">🛏️</div>
+                    <h3 class="font-bold text-lg mb-2">Quarto</h3>
+                    <ul class="text-sm space-y-1">
+                        <li>• Cama box casal</li>
+                        <li>• Ventilador de teto</li>
+                        <li>• Armário</li>
+                        <li>• Cabideiro</li>
+                        <li>• Roupas de cama</li>
+                        <li>• Cobertores</li>
+                    </ul>
+                </div>
+
+                <!-- Banheiro -->
+                <div class="bg-white/20 rounded-xl p-4 text-white">
+                    <div class="text-3xl mb-3">🛁</div>
+                    <h3 class="font-bold text-lg mb-2">Banheiro</h3>
+                    <ul class="text-sm space-y-1">
+                        <li>• Banheiro completo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Parte Exterior -->
+            <div class="mt-6 bg-white/20 rounded-xl p-4 text-white">
+                <h3 class="font-bold text-lg mb-3 flex items-center">
+                    <span class="text-2xl mr-2">🏞️</span>
+                    Parte Exterior
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div>
+                        <strong>• Varanda:</strong> Mesa e cadeiras para 4 pessoas e rede
+                    </div>
+                    <div>
+                        <strong>• Piscina:</strong> Área externa com piscina
+                    </div>
+                    <div>
+                        <strong>• Lazer:</strong> Sala de jogos e espaço kids para as crianças
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ================================================== -->
+        <!-- SEÇÃO DOS CHALÉS -->
+        <!-- ================================================== -->
+        <div class="rounded-2xl shadow-xl p-6 mb-6" style="background: linear-gradient(135deg, #8b5a2b 0%, #d2691e 100%);">
+            <h2 class="text-2xl font-bold text-white mb-6 text-center">A vida pede pausas</h2>
+            <div class="text-center mb-6 relative group">
+                <video id="videoPausa" autoplay loop playsinline 
+                       class="w-full h-80 object-cover rounded-xl shadow-lg mx-auto"
+                       poster="https://lh3.googleusercontent.com/d/18tKpSpnYlcIG2rHCrlQKn5bSFz-x3CZN"
+                       oncontextmenu="return false;" preload="auto" muted>
+                    <source src="videos/video01.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos HTML5.
+                </video>
+                
+                <!-- Botão de Pausa/Play -->
+                <button id="btnPausa" class="absolute bottom-4 right-16 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all" 
+                        onclick="togglePause()" aria-label="Pausar/Reproduzir vídeo">
+                    <i class="fas fa-pause"></i>
+                </button>
+                
+                <!-- Botão de Som -->
+                <button id="btnSom" class="absolute bottom-4 right-4 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all"
+                        onclick="toggleSom()" aria-label="Ativar/Desativar som">
+                    <i class="fas fa-volume-mute"></i>
+                </button>
+                <!-- Fallback com emoji quando a imagem não carrega -->
+                <div class="w-full h-80 bg-gradient-to-br from-amber-600 to-orange-800 rounded-xl shadow-lg flex items-center justify-center" style="display: none;">
+                    <div class="text-center text-white">
+                        <div class="text-6xl mb-4">🏘️</div>
+                        <p class="text-2xl font-bold">Nossos Chalés</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 text-white">
+                <!-- Card 1: Descrição do Chalé Toca do Esquilo -->
+                <div class="bg-white/20 rounded-xl p-4 text-center">
+                    <div class="text-4xl mb-3">🏡</div>
+                    <h3 class="font-bold text-lg mb-2">Chalé Toca do Esquilo</h3>
+                    <p class="text-sm opacity-90">Aconchegante e familiar, perfeito para relaxar em meio à natureza</p>
+                </div>
+                <!-- Card 2: Destaque da vista privilegiada -->
+                <div class="bg-white/20 rounded-xl p-4 text-center">
+                    <div class="text-4xl mb-3">🌲</div>
+                    <h3 class="font-bold text-lg mb-2">Vista Privilegiada</h3>
+                    <p class="text-sm opacity-90">Localização única com vista para a Represa de Jurumirim</p>
+                </div>
+                <!-- Card 3: Destaque da experiência completa -->
+                <div class="bg-white/20 rounded-xl p-4 text-center">
+                    <div class="text-4xl mb-3">✨</div>
+                    <h3 class="font-bold text-lg mb-2">Experiência Completa</h3>
+                    <p class="text-sm opacity-90">Todas as comodidades para uma estadia inesquecível</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================== -->
+        <!-- PACOTES ESPECIAIS -->
+        <!-- ================================================== -->
+        <div class="rounded-2xl shadow-xl p-6 mb-6" style="background-color: #FF0000;">
+            <h2 class="text-2xl font-bold text-white mb-6 text-center">Pacotes</h2>
+
+            <!-- Imagem grande de natal -->
+            <div class="mb-6 text-center">
+                <img src="https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=800&h=400&fit=crop"
+                     alt="Pacote de Natal 2024"
+                     class="w-full max-w-4xl h-80 object-cover rounded-xl shadow-lg mx-auto border-4 border-white">
+            </div>
+
+            <!-- Texto do pacote de natal -->
+            <div class="text-center mb-6 p-6 rounded-xl" style="background-color: #FF0000;">
+                <h3 class="text-3xl font-bold text-white mb-4">🎄✨ PACOTE DE NATAL – TOCA DO ESQUILO ✨🎄</h3>
+                <p class="text-lg text-white opacity-90 mb-6">
+                    Viva a magia do Natal em um lugar aconchegante no meio da natureza! 🌲
+                </p>
+
+                <!-- Detalhes do pacote -->
+                <div class="bg-white/20 rounded-xl p-6 mb-6 text-left inline-block">
+                    <div class="text-white space-y-2">
+                        <p>🏡 <strong>Chalé estilo rústico</strong> – para até 4 pessoas</p>
+                        <p>📅 <strong>23 a 26 de dezembro de 2025</strong></p>
+                        <p>💰 <strong>R$ 1.950</strong> o pacote completo</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botão de Reservar para WhatsApp -->
+            <div class="text-center mt-6">
+                <a href="https://wa.me/5514991407288?text=Olá! Gostaria de saber mais sobre o Pacote de Natal 2024 na Toca do Esquilo"
+                   target="_blank"
+                   class="inline-block bg-white text-red-700 hover:bg-gray-100 font-bold py-4 px-8 rounded-full text-lg transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
+                    <i class="fab fa-whatsapp mr-2"></i>
+                    RESERVAR AGORA
+                </a>
+            </div>
+        </div>
+
+        <!-- ================================================== -->
+        <!-- GALERIA DE FOTOS ORGANIZADA POR TEMAS -->
+        <!-- ================================================== -->
+
+        <!-- SEÇÃO 1: CHALÉS -->
+        <div class="rounded-2xl shadow-xl p-6 mb-6" style="background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);">
+            <h2 class="text-2xl font-bold text-white mb-6 text-center flex items-center justify-center">
+                <span class="text-3xl mr-3">🏘️</span>
+                Nossos Chalés
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Chalé Principal -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('chales', 0)">
+                    <img src="images/chales/chaleamarelo03.jpeg"
+                         alt="Chalé Principal - Toca do Esquilo"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-amber-600 to-orange-800 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🏡</div>
+                            <p class="font-bold">Chalé Principal</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interior do Chalé -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('chales', 1)">
+                    <img src="images/chales/chalelaranja01.jpeg"
+                         alt="Interior aconchegante do chalé"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-amber-700 to-red-900 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🛏️</div>
+                            <p class="font-bold">Interior do Chalé</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cozinha Completa -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('chales', 2)">
+                    <img src="images/chales/chaleazul02.jpeg"
+                         alt="Cozinha completa e equipada"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-orange-600 to-red-800 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🍳</div>
+                            <p class="font-bold">Cozinha</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quarto Principal -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('chales', 3)">
+                    <img src="images/chales/chalevermelho01.jpeg"
+                         alt="Quarto principal com cama confortável"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-amber-800 to-orange-900 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🛏️</div>
+                            <p class="font-bold">Quarto</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Banheiro -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('chales', 4)">
+                    <img src="images/chales/quarto1.jpeg"
+                         alt="Banheiro com hidromassagem"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-blue-600 to-purple-800 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🛁</div>
+                            <p class="font-bold">Banheiro</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sala de Estar -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('chales', 5)">
+                    <img src="images/chales/chaleroxo01.jpeg"
+                         alt="Sala de estar aconchegante"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-orange-500 to-amber-700 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🛋️</div>
+                            <p class="font-bold">Sala de Estar</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lareira -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('chales', 6)">
+                    <img src="images/chales/sala_tv.jpeg"
+                         alt="Lareira para momentos românticos"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-red-700 to-orange-900 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🔥</div>
+                            <p class="font-bold">Lareira</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vista Interna -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('chales', 7)">
+                    <img src="images/chales/cozinha1.jpeg"
+                         alt="Vista interna do chalé"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-amber-600 to-yellow-800 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🏠</div>
+                            <p class="font-bold">Ambiente Interno</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 2: SALÃO DE JOGOS E ESPAÇO KIDS -->
+        <div class="rounded-2xl shadow-xl p-6 mb-6" style="background: linear-gradient(135deg, #00B4DB 0%, #0083B0 100%);">
+            <h2 class="text-2xl font-bold text-white mb-6 text-center flex items-center justify-center">
+                <span class="text-3xl mr-3">🎮</span>
+                Salão de Jogos e Espaço Kids
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Salão de Jogos -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('jogos', 0)">
+                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop"
+                         alt="Salão de jogos e entretenimento"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🎯</div>
+                            <p class="font-bold">Salão de Jogos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Espaço Kids -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('jogos', 1)">
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop"
+                         alt="Espaço kids com atividades"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🧸</div>
+                            <p class="font-bold">Espaço Kids</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mesa de Jogos -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('jogos', 2)">
+                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop"
+                         alt="Mesa de jogos e cartas"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-green-400 to-blue-600 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🎲</div>
+                            <p class="font-bold">Mesa de Jogos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Brinquedos Infantis -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('jogos', 3)">
+                    <img src="https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop"
+                         alt="Brinquedos e jogos infantis"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🧩</div>
+                            <p class="font-bold">Brinquedos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Área de Recreação -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('jogos', 4)">
+                    <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop"
+                         alt="Área de recreação infantil"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-purple-400 to-pink-600 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🎪</div>
+                            <p class="font-bold">Área Kids</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jogos de Tabuleiro -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('jogos', 5)">
+                    <img src="https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop"
+                         alt="Jogos de tabuleiro em família"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🎯</div>
+                            <p class="font-bold">Jogos de Tabuleiro</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Espaço Teen -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('jogos', 6)">
+                    <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop"
+                         alt="Espaço para adolescentes"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🎮</div>
+                            <p class="font-bold">Espaço Teen</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cantinho da Leitura -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('jogos', 7)">
+                    <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop"
+                         alt="Cantinho da leitura infantil"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">📚</div>
+                            <p class="font-bold">Cantinho da Leitura</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 3: LAZER -->
+        <div class="rounded-2xl shadow-xl p-6 mb-6" style="background: linear-gradient(135deg, #228B22 0%, #32CD32 100%);">
+            <h2 class="text-2xl font-bold text-white mb-6 text-center flex items-center justify-center">
+                <span class="text-3xl mr-3">🏞️</span>
+                Lazer
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Jardim -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('externa', 0)">
+                    <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop"
+                         alt="Jardim e área verde"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🌳</div>
+                            <p class="font-bold">Jardim</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Varanda -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('externa', 1)">
+                    <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop"
+                         alt="Varanda com vista"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🌿</div>
+                            <p class="font-bold">Varanda</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Piscina -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('externa', 2)">
+                    <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=300&fit=crop"
+                         alt="Piscina refrescante"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-blue-400 to-cyan-600 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🏊</div>
+                            <p class="font-bold">Piscina</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Churrasqueira -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('externa', 3)">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop"
+                         alt="Churrasqueira externa"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-red-500 to-orange-600 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🥩</div>
+                            <p class="font-bold">Churrasqueira</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estacionamento -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('externa', 4)">
+                    <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop"
+                         alt="Estacionamento coberto"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-gray-500 to-gray-700 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🚗</div>
+                            <p class="font-bold">Estacionamento</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Área de Lazer -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('externa', 5)">
+                    <img src="https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=400&h=300&fit=crop"
+                         alt="Área de lazer externa"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-green-400 to-yellow-600 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">⚽</div>
+                            <p class="font-bold">Área de Lazer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jardim de Inverno -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('externa', 6)">
+                    <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop"
+                         alt="Jardim de inverno aconchegante"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-emerald-500 to-green-700 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🌺</div>
+                            <p class="font-bold">Jardim de Inverno</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mirante -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('externa', 7)">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop"
+                         alt="Mirante com vista panorâmica"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🏔️</div>
+                            <p class="font-bold">Mirante</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 4: NATUREZA -->
+        <div class="rounded-2xl shadow-xl p-6" style="background: linear-gradient(135deg, #4169E1 0%, #00CED1 100%);">
+            <h2 class="text-2xl font-bold text-white mb-6 text-center flex items-center justify-center">
+                <span class="text-3xl mr-3">🌲</span>
+                Natureza ao Redor
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Represa -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('natureza', 0)">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop"
+                         alt="Represa de Jurumirim"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-blue-400 to-cyan-600 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🌊</div>
+                            <p class="font-bold">Represa</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Serra -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('natureza', 1)">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop"
+                         alt="Vista da serra"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-green-500 to-blue-700 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">⛰️</div>
+                            <p class="font-bold">Serra</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floresta -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('natureza', 2)">
+                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop"
+                         alt="Floresta nativa ao redor"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-green-600 to-emerald-800 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🌲</div>
+                            <p class="font-bold">Floresta</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rio/Córrego -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('natureza', 3)">
+                    <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=400&h=300&fit=crop"
+                         alt="Córrego próximo ao chalé"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-blue-500 to-cyan-700 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🏞️</div>
+                            <p class="font-bold">Córrego</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pôr do Sol -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('natureza', 4)">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop"
+                         alt="Pôr do sol na represa"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-orange-400 to-red-600 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🌅</div>
+                            <p class="font-bold">Pôr do Sol</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nascer do Sol -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('natureza', 5)">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop"
+                         alt="Nascer do sol na serra"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-yellow-400 to-orange-600 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🌄</div>
+                            <p class="font-bold">Nascer do Sol</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trilhas -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('natureza', 6)">
+                    <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&h=300&fit=crop"
+                         alt="Trilhas para caminhada"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-amber-600 to-green-800 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🥾</div>
+                            <p class="font-bold">Trilhas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fauna -->
+                <div class="gallery-image cursor-pointer rounded-xl overflow-hidden" onclick="openModal('natureza', 7)">
+                    <img src="https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=400&h=300&fit=crop"
+                         alt="Animais silvestres da região"
+                         class="w-full h-48 object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full h-48 bg-gradient-to-br from-brown-500 to-orange-700 flex items-center justify-center" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🦌</div>
+                            <p class="font-bold">Fauna Local</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ================================================== -->
+    <!-- MODAL PARA IMAGENS EM TELA CHEIA -->
+    <!-- ================================================== -->
+    <div id="imageModal" class="modal fixed inset-0 bg-black bg-opacity-90 hidden z-50 flex items-center justify-center p-4">
+        <div class="modal-content relative max-w-4xl max-h-full">
+            <!-- Botão de fechar modal no canto superior direito -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 z-10">
+                <i class="fas fa-times"></i>
+            </button>
+            <!-- Container onde o conteúdo da imagem será inserido dinamicamente -->
+            <div id="modalImageContainer" class="w-full h-full flex items-center justify-center">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+            <!-- Controles de navegação (anterior/próxima) na parte inferior -->
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                <!-- Botão para imagem anterior -->
+                <button onclick="previousImage()" class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-full">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <!-- Botão para próxima imagem -->
+                <button onclick="nextImage()" class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-2 rounded-full">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ================================================== -->
+    <!-- JAVASCRIPT PARA FUNCIONALIDADES DA PÁGINA -->
+    <!-- ================================================== -->
+    <script>
+        /* ================================================== */
+        /* GALERIAS ORGANIZADAS POR SEÇÕES TEMÁTICAS */
+        /* ================================================== */
+
+        /* GALERIA DOS CHALÉS */
+        const galeriaChales = [
+            {
+                title: "Chalé Principal - Toca do Esquilo",
+                content: `<img src="images/pedalinho.jpg"
+                         alt="Chalé Principal - Toca do Esquilo"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-amber-600 to-orange-800 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🏡</div>
+                            <p class="text-2xl font-bold">Chalé Principal</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Interior Aconchegante",
+                content: `<img src="images/logo.png.png"
+                         alt="Interior aconchegante do chalé"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-amber-700 to-red-900 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🛏️</div>
+                            <p class="text-2xl font-bold">Interior do Chalé</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Cozinha Completa",
+                content: `<img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop"
+                         alt="Cozinha completa e equipada"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-orange-600 to-red-800 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🍳</div>
+                            <p class="text-2xl font-bold">Cozinha</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Quarto Principal",
+                content: `<img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&h=600&fit=crop"
+                         alt="Quarto principal com cama confortável"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-amber-800 to-orange-900 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🛏️</div>
+                            <p class="text-2xl font-bold">Quarto</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Banheiro com Hidromassagem",
+                content: `<img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?w=800&h=600&fit=crop"
+                         alt="Banheiro com hidromassagem"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-blue-600 to-purple-800 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🛁</div>
+                            <p class="text-2xl font-bold">Banheiro</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Sala de Estar",
+                content: `<img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop"
+                         alt="Sala de estar aconchegante"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-orange-500 to-amber-700 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🛋️</div>
+                            <p class="text-2xl font-bold">Sala de Estar</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Lareira Romântica",
+                content: `<img src="https://images.unsplash.com/photo-1605530916874-31d21cab24c9?w=800&h=600&fit=crop"
+                         alt="Lareira para momentos românticos"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-red-700 to-orange-900 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🔥</div>
+                            <p class="text-2xl font-bold">Lareira</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Ambiente Interno",
+                content: `<img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop"
+                         alt="Vista interna do chalé"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-amber-600 to-yellow-800 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🏠</div>
+                            <p class="text-2xl font-bold">Ambiente Interno</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            }
+        ];
+
+        /* Controle de Vídeo */
+        function togglePause() {
+            const video = document.getElementById('videoPausa');
+            const btnIcon = document.querySelector('#btnPausa i');
+            
+            if (video.paused) {
+                video.play();
+                btnIcon.classList.remove('fa-play');
+                btnIcon.classList.add('fa-pause');
+            } else {
+                video.pause();
+                btnIcon.classList.remove('fa-pause');
+                btnIcon.classList.add('fa-play');
+            }
+        }
+
+        // Controle de Áudio
+        function toggleSom() {
+            const video = document.getElementById('videoPausa');
+            const btnIcon = document.querySelector('#btnSom i');
+            
+            if (video.muted) {
+                video.muted = false;
+                btnIcon.classList.remove('fa-volume-mute');
+                btnIcon.classList.add('fa-volume-up');
+                // Tocar o vídeo quando ativar o som (requer interação do usuário)
+                video.play().catch(e => console.log("Reprodução automática não permitida"));
+            } else {
+                video.muted = true;
+                btnIcon.classList.remove('fa-volume-up');
+                btnIcon.classList.add('fa-volume-mute');
+            }
+        }
+
+        // Pausar/Reproduzir ao clicar no vídeo
+        document.getElementById('videoPausa').addEventListener('click', function() {
+            togglePause();
+        });
+
+        // Atualizar ícone quando o vídeo terminar (para o caso de não estar em loop)
+        document.getElementById('videoPausa').addEventListener('ended', function() {
+            const btnIcon = document.querySelector('#btnPausa i');
+            btnIcon.classList.remove('fa-pause');
+            btnIcon.classList.add('fa-play');
+        });
+
+        // Inicializar botão de som
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('videoPausa');
+            const btnIcon = document.querySelector('#btnSom i');
+            
+            // Configurar evento para permitir som após interação do usuário
+            const enableSound = () => {
+                video.muted = false;
+                btnIcon.classList.remove('fa-volume-mute');
+                btnIcon.classList.add('fa-volume-up');
+                document.removeEventListener('click', enableSound);
+                document.removeEventListener('scroll', enableSound);
+            };
+            
+            // Permitir ativar som após interação
+            document.addEventListener('click', enableSound, { once: true });
+            document.addEventListener('scroll', enableSound, { once: true });
+        });
+
+        /* GALERIA DO SALÃO DE JOGOS E ESPAÇO KIDS */
+        const galeriaJogos = [
+            {
+                title: "Salão de Jogos",
+                content: `<img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+                         alt="Salão de jogos e entretenimento"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🎯</div>
+                            <p class="text-2xl font-bold">Salão de Jogos</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Espaço Kids",
+                content: `<img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=600&fit=crop"
+                         alt="Espaço kids com atividades"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🧸</div>
+                            <p class="text-2xl font-bold">Espaço Kids</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Mesa de Jogos",
+                content: `<img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
+                         alt="Mesa de jogos e cartas"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-green-400 to-blue-600 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🎲</div>
+                            <p class="text-2xl font-bold">Mesa de Jogos</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Brinquedos Infantis",
+                content: `<img src="https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=800&h=600&fit=crop"
+                         alt="Brinquedos e jogos infantis"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🧩</div>
+                            <p class="text-2xl font-bold">Brinquedos</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Área de Recreação",
+                content: `<img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&h=600&fit=crop"
+                         alt="Área de recreação infantil"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-purple-400 to-pink-600 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🎪</div>
+                            <p class="text-2xl font-bold">Área Kids</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Jogos de Tabuleiro",
+                content: `<img src="https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=800&h=600&fit=crop"
+                         alt="Jogos de tabuleiro em família"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🎯</div>
+                            <p class="text-2xl font-bold">Jogos de Tabuleiro</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Espaço Teen",
+                content: `<img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&h=600&fit=crop"
+                         alt="Espaço para adolescentes"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🎮</div>
+                            <p class="text-2xl font-bold">Espaço Teen</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Cantinho da Leitura",
+                content: `<img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&h=600&fit=crop"
+                         alt="Cantinho da leitura infantil"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">📚</div>
+                            <p class="text-2xl font-bold">Cantinho da Leitura</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            }
+        ];
+
+        /* GALERIA DA LAZER */
+        const galeriaExterna = [
+            {
+                title: "Jardim",
+                content: `<img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=600&fit=crop"
+                         alt="Jardim e área verde"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🌳</div>
+                            <p class="text-2xl font-bold">Jardim</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Varanda",
+                content: `<img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop"
+                         alt="Varanda com vista"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🌿</div>
+                            <p class="text-2xl font-bold">Varanda</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Piscina",
+                content: `<img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&h=600&fit=crop"
+                         alt="Piscina refrescante"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-blue-400 to-cyan-600 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🏊</div>
+                            <p class="text-2xl font-bold">Piscina</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Churrasqueira",
+                content: `<img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop"
+                         alt="Churrasqueira externa"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-red-500 to-orange-600 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🥩</div>
+                            <p class="text-2xl font-bold">Churrasqueira</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Estacionamento",
+                content: `<img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=800&h=600&fit=crop"
+                         alt="Estacionamento coberto"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-gray-500 to-gray-700 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🚗</div>
+                            <p class="text-2xl font-bold">Estacionamento</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Área de Lazer",
+                content: `<img src="https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=800&h=600&fit=crop"
+                         alt="Área de lazer externa"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-green-400 to-yellow-600 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">⚽</div>
+                            <p class="text-2xl font-bold">Área de Lazer</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Jardim de Inverno",
+                content: `<img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=600&fit=crop"
+                         alt="Jardim de inverno aconchegante"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-emerald-500 to-green-700 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🌺</div>
+                            <p class="text-2xl font-bold">Jardim de Inverno</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Mirante",
+                content: `<img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop"
+                         alt="Mirante com vista panorâmica"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🏔️</div>
+                            <p class="text-2xl font-bold">Mirante</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            }
+        ];
+
+        /* GALERIA DA NATUREZA */
+        const galeriaNatureza = [
+            {
+                title: "Represa de Jurumirim",
+                content: `<img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop"
+                         alt="Represa de Jurumirim"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-blue-400 to-cyan-600 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🌊</div>
+                            <p class="text-2xl font-bold">Represa</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Vista da Serra",
+                content: `<img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop"
+                         alt="Vista da serra"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-green-500 to-blue-700 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">⛰️</div>
+                            <p class="text-2xl font-bold">Serra</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Floresta",
+                content: `<img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop"
+                         alt="Floresta nativa ao redor"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-green-600 to-emerald-800 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🌲</div>
+                            <p class="text-2xl font-bold">Floresta</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Córrego",
+                content: `<img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&h=600&fit=crop"
+                         alt="Córrego próximo ao chalé"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-blue-500 to-cyan-700 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🏞️</div>
+                            <p class="text-2xl font-bold">Córrego</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Pôr do Sol",
+                content: `<img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop"
+                         alt="Pôr do sol na represa"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-orange-400 to-red-600 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🌅</div>
+                            <p class="text-2xl font-bold">Pôr do Sol</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Nascer do Sol",
+                content: `<img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop"
+                         alt="Nascer do sol na serra"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-yellow-400 to-orange-600 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🌄</div>
+                            <p class="text-2xl font-bold">Nascer do Sol</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Trilhas",
+                content: `<img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=600&fit=crop"
+                         alt="Trilhas para caminhada"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-amber-600 to-green-800 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🥾</div>
+                            <p class="text-2xl font-bold">Trilhas</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            },
+            {
+                title: "Fauna Local",
+                content: `<img src="https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=800&h=600&fit=crop"
+                         alt="Animais silvestres da região"
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="w-full max-h-96 bg-gradient-to-br from-brown-500 to-orange-700 flex items-center justify-center rounded-lg shadow-lg" style="display: none;">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">🦌</div>
+                            <p class="text-2xl font-bold">Fauna Local</p>
+                            <p class="text-lg opacity-90">Imagem não disponível</p>
+                        </div>
+                    </div>`
+            }
+        ];
+
+        /* ================================================== */
+        /* VARIÁVEIS GLOBAIS */
+        /* ================================================== */
+
+        /* Estado atual da galeria */
+        let currentSection = 'chales'; // Seção atual
+        let currentImageIndex = 0; // Índice da imagem atual na seção
+
+        /* ================================================== */
+        /* FUNÇÕES DO MODAL */
+        /* ================================================== */
+
+        /* Função para abrir o modal com uma imagem específica de uma seção */
+        function openModal(section, index) {
+            console.log('openModal called with:', section, index);
+            currentSection = section;
+            currentImageIndex = index;
+            const modal = document.getElementById('imageModal');
+            const container = document.getElementById('modalImageContainer');
+
+            // Obter a galeria da seção atual
+            const currentGallery = getGalleryBySection(section);
+            const imageData = currentGallery[index];
+
+            container.innerHTML = `
+                <div class="text-center">
+                    ${imageData.content}
+                    <h3 class="text-white text-2xl font-bold mt-4">${imageData.title}</h3>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        /* Função auxiliar para obter a galeria de uma seção específica */
+        function getGalleryBySection(section) {
+            switch(section) {
+                case 'chales': return galeriaChales;
+                case 'jogos': return galeriaJogos;
+                case 'lazer': return galeriaExterna;
+                case 'natureza': return galeriaNatureza;
+                default: return galeriaChales;
+            }
+        }
+
+        /* Função para navegar para a próxima imagem (dentro da mesma seção) */
+        function nextImage() {
+            const currentGallery = getGalleryBySection(currentSection);
+            currentImageIndex = (currentImageIndex + 1) % currentGallery.length;
+            openModal(currentSection, currentImageIndex);
+        }
+
+        /* Função para navegar para a imagem anterior (dentro da mesma seção) */
+        function previousImage() {
+            const currentGallery = getGalleryBySection(currentSection);
+            currentImageIndex = (currentImageIndex - 1 + currentGallery.length) % currentGallery.length;
+            openModal(currentSection, currentImageIndex);
+        }
+
+        /* Função para fechar o modal */
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        /* ================================================== */
+        /* EVENT LISTENERS */
+        /* ================================================== */
+
+        /* Fechar modal quando clicar fora da imagem */
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        /* Navegação por teclado quando o modal está aberto */
+        document.addEventListener('keydown', function(e) {
+            const modal = document.getElementById('imageModal');
+            if (!modal.classList.contains('hidden')) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                } else if (e.key === 'ArrowRight') {
+                    nextImage();
+                } else if (e.key === 'ArrowLeft') {
+                    previousImage();
+                }
+            }
+        });
+    </script>
+    
+    <!-- ================================================== -->
+    <!-- SCRIPT DE SEGURANÇA CLOUDFLARE -->
+    <!-- ================================================== -->
+    <!-- Script de proteção contra ataques DDoS e outras ameaças de segurança -->
+    <!-- Este script é inserido automaticamente pelo Cloudflare para proteger o site -->
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984c810dc0a832a9',t:'MTc1ODgyNDA5Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+
+    <!-- ================================================== -->
+    <!-- FORMULÁRIO DE RESERVA -->
+    <!-- ================================================== -->
+    <div class="py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="info-card rounded-2xl shadow-2xl text-white p-8 mb-6">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold mb-4">Faça sua Reserva</h2>
+                    <p class="text-lg opacity-90 max-w-3xl mx-auto">
+                        Preencha o formulário abaixo e entraremos em contato para confirmar sua reserva
+                    </p>
+                </div>
+
+            <form class="max-w-2xl mx-auto" onsubmit="enviarReserva(event)">
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <!-- Nome completo -->
+                    <div>
+                        <label for="nome" class="block text-white font-semibold mb-2">Nome Completo *</label>
+                        <input type="text" id="nome" name="nome" required
+                               class="w-full px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-green-500 focus:outline-none bg-white/20 text-white placeholder-white/70"
+                               placeholder="Seu nome completo">
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label for="email" class="block text-white font-semibold mb-2">E-mail *</label>
+                        <input type="email" id="email" name="email" required
+                               class="w-full px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-green-500 focus:outline-none bg-white/20 text-white placeholder-white/70"
+                               placeholder="seu.email@exemplo.com">
+                    </div>
+
+                    <!-- Telefone -->
+                    <div>
+                        <label for="telefone" class="block text-white font-semibold mb-2">Telefone *</label>
+                        <input type="tel" id="telefone" name="telefone" required
+                               class="w-full px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-green-500 focus:outline-none bg-white/20 text-white placeholder-white/70"
+                               placeholder="(00) 00000-0000">
+                    </div>
+
+                    <!-- CPF -->
+                    <div>
+                        <label for="cpf" class="block text-white font-semibold mb-2">CPF *</label>
+                        <input type="text" id="cpf" name="cpf" required
+                               class="w-full px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-green-500 focus:outline-none bg-white/20 text-white placeholder-white/70"
+                               placeholder="000.000.000-00">
+                    </div>
+
+                    <!-- Cidade -->
+                    <div>
+                        <label for="cidade" class="block text-white font-semibold mb-2">Cidade *</label>
+                        <input type="text" id="cidade" name="cidade" required
+                               class="w-full px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-green-500 focus:outline-none bg-white/20 text-white placeholder-white/70"
+                               placeholder="Sua cidade">
+                    </div>
+
+                    <!-- Número de pessoas -->
+                    <div class="relative">
+                        <label for="pessoas" class="block text-white font-semibold mb-2">Número de Pessoas *</label>
+                        <select id="pessoas" name="pessoas" required
+                                class="w-full px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-green-500 focus:outline-none bg-green-800/50 text-white appearance-none">
+                            <option value="">Selecione</option>
+                            <option value="1" class="bg-green-800/80">1 pessoa</option>
+                            <option value="2" class="bg-green-800/80">2 pessoas</option>
+                            <option value="3" class="bg-green-800/80">3 pessoas</option>
+                            <option value="4" class="bg-green-800/80">4 pessoas</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+
+                    <!-- Data de check-in -->
+                    <div>
+                        <label for="checkin" class="block text-white font-semibold mb-2">Data de Check-in *</label>
+                        <input type="date" id="checkin" name="checkin" required
+                               class="w-full px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-green-500 focus:outline-none bg-green-800/50 text-white">
+                    </div>
+
+                    <!-- Data de check-out -->
+                    <div>
+                        <label for="checkout" class="block text-white font-semibold mb-2">Data de Check-out *</label>
+                        <input type="date" id="checkout" name="checkout" required
+                               class="w-full px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-green-500 focus:outline-none bg-green-800/50 text-white">
+                    </div>
+                </div>
+
+                <!-- Mensagem -->
+                <div class="mb-8">
+                    <label for="mensagem" class="block text-white font-semibold mb-2">Mensagem/Observações</label>
+                    <textarea id="mensagem" name="mensagem" rows="4"
+                              class="w-full px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-green-500 focus:outline-none bg-white/20 text-white placeholder-white/70"
+                              placeholder="Adicione sua mensagem e a idade de cada pessoa"></textarea>
+                </div>
+
+                <!-- Botões de ação -->
+                <div class="text-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button type="submit"
+                            class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-full text-lg transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-paper-plane mr-2"></i>
+                        ENVIAR RESERVA
+                    </button>
+
+                    <a href="https://wa.me/5514991407288?text=Olá! Gostaria de fazer uma reserva no Chalé Toca do Esquilo"
+                       target="_blank"
+                       class="inline-block w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full text-lg transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
+                        <i class="fab fa-whatsapp mr-2"></i>
+                        FALAR NO WHATSAPP
+                    </a>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script para o formulário de reserva -->
+    <script>
+        // Função para formatar data no formato DD/MM/YYYY
+        function formatarData(data) {
+            if (!data) return 'Não informada';
+            const [ano, mes, dia] = data.split('-');
+            return `${dia}/${mes}/${ano}`;
+        }
+
+        // Função para enviar o formulário
+        function enviarReserva(event) {
+            event.preventDefault();
+            
+            // Coletar dados do formulário
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const telefone = document.getElementById('telefone').value;
+            const cpf = document.getElementById('cpf').value;
+            const cidade = document.getElementById('cidade').value;
+            const selectPessoas = document.getElementById('pessoas');
+            const pessoas = selectPessoas.value;
+            const pessoasTexto = selectPessoas.options[selectPessoas.selectedIndex].text;
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            const mensagem = document.getElementById('mensagem').value;
+
+            // Validar datas
+            if (new Date(checkout) <= new Date(checkin)) {
+                alert('A data de check-out deve ser posterior à data de check-in');
+                return;
+            }
+
+            // Criar mensagem para WhatsApp
+            const mensagemWhatsApp = `*NOVA RESERVA - CHALÉ TOCA DO ESQUILO*%0A%0A` +
+                `*Nome:* ${nome}%0A` +
+                `*CPF:* ${cpf}%0A` +
+                `*Cidade:* ${cidade}%0A` +
+                `*E-mail:* ${email}%0A` +
+                `*Telefone:* ${telefone}%0A` +
+                `*Número de Pessoas:* ${pessoasTexto}%0A` +
+                `*Check-in:* ${formatarData(checkin)}%0A` +
+                `*Check-out:* ${formatarData(checkout)}%0A` +
+                `*Mensagem:* ${mensagem || 'Nenhuma mensagem adicional'}`;
+
+            // Redirecionar para WhatsApp
+            window.open(`https://wa.me/5514991407288?text=${mensagemWhatsApp}`, '_blank');
+
+            // Mostrar confirmação
+            alert('✅ Reserva enviada com sucesso! Entraremos em contato em breve para confirmar sua reserva.');
+
+            // Limpar formulário
+            event.target.reset();
+        }
+
+        // Estilo para as opções do select
+        document.querySelectorAll('select option').forEach(option => {
+            option.classList.add('bg-green-800/80', 'text-white');
+        });
+
+        // Máscara para CPF
+        document.getElementById('cpf').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            e.target.value = value;
+        });
+
+        // Máscara para telefone
+        document.getElementById('telefone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.substring(0, 11);
+            
+            if (value.length > 10) {
+                value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+            } else if (value.length > 5) {
+                value = value.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+            } else if (value.length > 2) {
+                value = value.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+            } else if (value.length > 0) {
+                value = value.replace(/^(\d*)/, '($1');
+            }
+            e.target.value = value;
+        });
+
+        // Configurar datas mínimas para os campos de data
+        document.addEventListener('DOMContentLoaded', function() {
+            const hoje = new Date().toISOString().split('T')[0];
+            document.getElementById('checkin').min = hoje;
+            document.getElementById('checkout').min = hoje;
+
+            // Atualizar data mínima do checkout quando a data de check-in for alterada
+            document.getElementById('checkin').addEventListener('change', function() {
+                document.getElementById('checkout').min = this.value;
+                if (document.getElementById('checkout').value < this.value) {
+                    document.getElementById('checkout').value = this.value;
+                }
+            });
+        });
+    </script>
+</body>
+
+<!-- ================================================== -->
+<!-- FIM DO DOCUMENTO HTML -->
+<!-- ================================================== -->
+</html>
